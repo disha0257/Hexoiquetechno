@@ -1,60 +1,238 @@
-import Navbar from "../components/Navbar/Navbar";
-import Hero from "../components/Hero/Hero";
-import TrustedCompanies from "../components/TrustedCompanies/TrustedCompanies";
-import Services from "../components/Services/Services";
-import About from "../components/About/About";
-import WhyChoose from "../components/WhyChoose/WhyChoose";
-import Technologies from "../components/Technologies/Technologies";
-import Stats from "../components/Stats/Stats";
-import Portfolio from "../components/Portfolio/Portfolio";
-import Testimonials from "../components/Testimonials/Testimonials";
-import Industries from "../components/Industries/Industries";
-import Contact from "../components/Contact/Contact";
-import Footer from "../components/Footer/Footer";
+import "../App.css";
 
-const Home = () => {
+import logo from "../assets/logo.png";
+import heroImage from "../assets/hero.png";
+
+function Home() {
   return (
     <>
-      {/* Navigation */}
-      <Navbar />
+      {/* Navbar */}
 
-      {/* Hero Section */}
-      <Hero />
+      <header className="header">
+        <div className="container navbar">
 
-      {/* Trusted Companies */}
-      <TrustedCompanies />
+          <div className="logo-section">
+            <img src={logo} alt="Hexonique" className="logo-img" />
+          </div>
 
-      {/* Services */}
-      <Services />
+          <nav>
+            <ul className="nav-links">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Portfolio</a></li>
+              <li><a href="#">Industries</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </nav>
 
-      {/* About */}
-      <About />
+          <button className="btn-primary">
+            Let's Talk
+          </button>
 
-      {/* Why Choose Hexonique */}
-      <WhyChoose />
+        </div>
+      </header>
 
-      {/* Technologies */}
-      <Technologies />
+      {/* Hero */}
 
-      {/* Statistics */}
-      <Stats />
+      <section className="hero">
 
-      {/* Portfolio */}
-      <Portfolio />
+        <div className="container hero-container">
 
-      {/* Testimonials */}
-      <Testimonials />
+          <div className="hero-content">
 
-      {/* Industries */}
-      <Industries />
+            <span className="hero-tag">
+              INNOVATE • INTEGRATE • ELEVATE
+            </span>
 
-      {/* Contact CTA */}
-      <Contact />
+            <h1>
+              Building Future-Ready
+              <span> Digital Solutions</span>
+            </h1>
 
-      {/* Footer */}
-      <Footer />
+            <p>
+              We help startups, businesses and enterprises transform
+              their ideas into powerful digital experiences.
+            </p>
+
+            <div className="hero-buttons">
+
+              <button className="btn-primary">
+                Get Free Consultation
+              </button>
+
+              <button className="btn-outline">
+                View Our Work
+              </button>
+
+            </div>
+
+          </div>
+
+          <div className="hero-image">
+
+            <img
+              src={heroImage}
+              alt="Hero"
+            />
+
+          </div>
+
+        </div>
+
+      </section>
+      {/* ================= Services ================= */}
+
+      <section className="services">
+
+        <div className="container">
+
+          <span className="section-title">
+            WHAT WE DO
+          </span>
+
+          <h2>Our Services</h2>
+
+          <div className="service-grid">
+
+            <div className="service-card">
+              <h3>Software Development</h3>
+              <p>Custom enterprise software solutions.</p>
+            </div>
+
+            <div className="service-card">
+              <h3>Web Development</h3>
+              <p>Modern responsive React websites.</p>
+            </div>
+
+            <div className="service-card">
+              <h3>Mobile Apps</h3>
+              <p>Flutter Android & iOS applications.</p>
+            </div>
+
+            <div className="service-card">
+              <h3>AI Solutions</h3>
+              <p>Automation and AI integration.</p>
+            </div>
+
+            <div className="service-card">
+              <h3>Cloud</h3>
+              <p>Scalable cloud infrastructure.</p>
+            </div>
+
+            <div className="service-card">
+              <h3>UI / UX</h3>
+              <p>Beautiful digital experiences.</p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* ================= Stats ================= */}
+
+      <section className="stats">
+
+        <div className="container stats-grid">
+
+          <div>
+            <h2>50+</h2>
+            <p>Projects Delivered</p>
+          </div>
+
+          <div>
+            <h2>30+</h2>
+            <p>Happy Clients</p>
+          </div>
+
+          <div>
+            <h2>10+</h2>
+            <p>Technologies</p>
+          </div>
+
+          <div>
+            <h2>24/7</h2>
+            <p>Support</p>
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* ================= CTA ================= */}
+
+      <section className="cta">
+
+        <div className="container cta-box">
+
+          <div>
+
+            <h2>
+              Let's Build Something Amazing Together!
+            </h2>
+
+            <p>
+              Have an idea? Let's turn it into reality.
+            </p>
+
+          </div>
+
+          <button className="btn-primary">
+            Get In Touch
+          </button>
+
+        </div>
+
+      </section>
+
+      {/* ================= Footer ================= */}
+
+      <footer>
+
+        <div className="container footer">
+
+          <div>
+
+            <img
+              src={logo}
+              alt=""
+              className="footer-logo"
+            />
+
+            <p>
+              Building Future Ready Digital Solutions.
+            </p>
+
+          </div>
+
+          <div>
+
+            <h4>Quick Links</h4>
+
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Portfolio</a>
+            <a href="#">Contact</a>
+
+          </div>
+
+          <div>
+
+            <h4>Contact</h4>
+
+            <p>hello@hexonique.com</p>
+            <p>+91 XXXXX XXXXX</p>
+
+          </div>
+
+        </div>
+
+      </footer>
+
     </>
   );
-};
+}
 
-export default Home;
