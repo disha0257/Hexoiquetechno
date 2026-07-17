@@ -9,6 +9,7 @@ import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 import Loader from "./components/Loader/Loader";
 import ScrollProgress from "./components/ScrollProgress/ScrollProgress";
 import ScrollTop from "./components/ScrollTop/ScrollTop";
@@ -38,8 +39,6 @@ function AppContent() {
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </AnimatePresence>
-
-      <ScrollTop />
     </>
   );
 }

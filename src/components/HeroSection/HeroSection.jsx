@@ -1,49 +1,80 @@
-import { forwardRef } from "react";
-import { Link } from "react-router-dom";
+import "./HeroSection.css";
+import { FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-const heroVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0 },
-};
-
-const HeroSection = forwardRef(function HeroSection(_, ref) {
+function HeroSection() {
   return (
-    <section ref={ref} className="home-hero">
-      <video className="hero-video" autoPlay muted loop playsInline>
-        <source src="https://cdn.coverr.co/videos/coverr-modern-office-space-4166/1080p.mp4" type="video/mp4" />
+    <section className="hero">
+
+      {/* Background Video */}
+      <video
+        className="hero-video"
+        autoPlay
+        muted
+        loop
+        playsInline
+      >
+        <source src="/hero-video.mp4" type="video/mp4" />
       </video>
-      <div className="hero-overlay" />
 
-      <div className="container hero-frame">
-        <aside className="hero-contact-card">
-          <span className="contact-label">Contact</span>
-          <h3>Talk with our team</h3>
-          <p>Book a consultation for web, mobile, or AI project planning.</p>
-          <Link to="/contact" className="btn-outline hero-contact-action">
-            Request a Call
-          </Link>
-        </aside>
+      {/* Overlay */}
+      <div className="overlay"></div>
 
-        <div className="hero-copy">
-          <span className="section-title">IT Services & Digital Growth</span>
-          <h1>Build modern websites, scalable software, and AI-powered systems for faster business growth.</h1>
+      {/* Floating Circles */}
+      <div className="circle circle1"></div>
+      <div className="circle circle2"></div>
+      <div className="circle circle3"></div>
+
+      <div className="hero-container">
+
+        <motion.div
+          className="hero-content"
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: .8 }}
+        >
+
+          <span className="badge">
+            🚀 Modern IT Solutions
+          </span>
+
+          <h1>
+            Build Your
+            <span> Digital Future </span>
+            With Hexonique
+          </h1>
+
           <p>
-            Hexoique delivers premium digital experiences with design-led product thinking, cloud-first engineering,
-            and a focus on measurable outcomes.
+            We create world-class websites, enterprise software,
+            mobile applications and digital experiences that help
+            businesses grow faster.
           </p>
+
           <div className="hero-buttons">
-            <Link to="/contact" className="btn-primary">
-              Contact Us
-            </Link>
-            <Link to="/services" className="btn-outline">
-              See Services
-            </Link>
+
+            <button className="primary-btn">
+              Get Started
+              <FaArrowRight />
+            </button>
+
+            <button className="secondary-btn">
+              Our Services
+            </button>
+
           </div>
-        </div>
+
+        </motion.div>
+
       </div>
+
+      {/* Scroll Indicator */}
+
+      <div className="scroll-down">
+        <span></span>
+      </div>
+
     </section>
   );
-});
+}
 
 export default HeroSection;
