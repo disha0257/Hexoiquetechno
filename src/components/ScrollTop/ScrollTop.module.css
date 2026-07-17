@@ -1,0 +1,21 @@
+.scrollTop {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 1100;
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 22px 44px rgba(37, 99, 235, 0.25);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.scrollTop:hover {
+  transform: translateY(-4px) scale(1.05);
+}

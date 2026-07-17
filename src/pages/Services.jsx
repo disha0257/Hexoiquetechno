@@ -1,4 +1,5 @@
 import "../App.css";
+import Header from "../components/Header/Header";
 
 const services = [
   { title: "Software Development", description: "Custom applications for web, mobile, and enterprise operations." },
@@ -10,22 +11,7 @@ const services = [
 function Services() {
   return (
     <div className="page-shell">
-      <header className="header">
-        <div className="container navbar">
-          <a href="/" className="logo-section">
-            <span className="logo-text">Hexoique</span>
-          </a>
-          <nav>
-            <ul className="nav-links">
-              <li><a href="/">Home</a></li>
-              <li><a href="/about">About</a></li>
-              <li><a href="/services">Services</a></li>
-              <li><a href="/contact">Contact</a></li>
-            </ul>
-          </nav>
-          <a className="btn-primary" href="/contact">Let’s Talk</a>
-        </div>
-      </header>
+      <Header />
 
       <main>
         <section className="page-hero">
