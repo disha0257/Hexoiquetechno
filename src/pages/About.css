@@ -1,144 +1,890 @@
-/* About.css
-   Premium starter stylesheet matching About.jsx.
-   NOTE: Replace hero background image path if needed.
-*/
-.about{background:#f8fafc;color:#0f172a}
-.container{
-    width:min(1180px,90%);
-    margin:auto;
-}
-.aboutHero{
-    min-height:85vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:140px 20px 100px;
+/* ==========================================================
+   HEXONIQUE ABOUT PAGE PREMIUM LIGHT DESIGN
+========================================================== */
 
-    background:linear-gradient(
-    135deg,
-    #bfdbfe,
-    #4d6d94,
-    #1f2c42
-    );
+
+.about{
+
+background:#f8fafc;
+color:#0f172a;
+overflow:hidden;
+
 }
+
+
+.container{
+
+width:min(1180px,90%);
+margin:auto;
+
+}
+
+
+
+
+
+/* ==========================================================
+   HERO
+========================================================== */
+
+
+.aboutHero{
+
+min-height:85vh;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+text-align:center;
+
+padding:140px 20px 100px;
+
+position:relative;
+
+background:
+
+radial-gradient(
+circle at 10% 20%,
+rgba(59,130,246,.20),
+transparent 35%
+),
+
+radial-gradient(
+circle at 90% 20%,
+rgba(56,189,248,.20),
+transparent 35%
+),
+
+linear-gradient(
+135deg,
+#ffffff,
+#eff6ff
+);
+
+}
+
+
+
+.floating-circle{
+
+position:absolute;
+border-radius:50%;
+
+animation:float 12s infinite alternate;
+
+}
+
+
+
+.circle1{
+
+width:350px;
+height:350px;
+
+background:rgba(37,99,235,.12);
+
+left:-120px;
+top:-100px;
+
+}
+
+
+.circle2{
+
+width:250px;
+height:250px;
+
+background:rgba(56,189,248,.15);
+
+right:10%;
+top:80px;
+
+}
+
+
+.circle3{
+
+width:180px;
+height:180px;
+
+background:rgba(96,165,250,.18);
+
+right:-50px;
+bottom:-50px;
+
+}
+
+
+
+@keyframes float{
+
+from{
+transform:translateY(0);
+}
+
+to{
+transform:translateY(60px);
+}
+
+}
+
+
+
+
+
 .sectionTitle{
 
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
 
-    padding:12px 26px;
+display:inline-flex;
 
-    border-radius:50px;
+padding:10px 25px;
 
-    background:rgba(255,255,255,.12);
+border-radius:50px;
 
-    color:#60a5fa;
+background:#eff6ff;
 
-    border:1px solid rgba(255,255,255,.18);
+border:1px solid #bfdbfe;
 
-    backdrop-filter:blur(10px);
+color:#2563eb;
 
-    letter-spacing:4px;
+font-size:.8rem;
 
-    font-size:.8rem;
+font-weight:700;
 
-    font-weight:700;
+letter-spacing:3px;
 
-    margin-bottom:28px;
+margin-bottom:25px;
+
 }
+
+
+
+
 .aboutHero h1{
 
-    max-width:900px;
+font-size:clamp(3rem,6vw,5rem);
 
-    margin:auto;
+line-height:1.1;
 
-    font-size:clamp(3rem,5vw,4.8rem);
+font-weight:900;
 
-    line-height:1.1;
-
-    color:#ffffff;
-
-    font-weight:800;
-
-    margin-bottom:30px;
 }
+
+
+
 .aboutHero h1 span{
 
-    display:block;
+display:block;
 
-    margin-top:8px;
+background:
+linear-gradient(
+90deg,
+#2563eb,
+#38bdf8
+);
 
-    background:linear-gradient(
-        90deg,
-        #60a5fa,
-        #38bdf8
-    );
+-webkit-background-clip:text;
+color:transparent;
 
-    -webkit-background-clip:text;
-
-    -webkit-text-fill-color:transparent;
 }
+
+
+
 .aboutHero p{
 
-    max-width:760px;
+max-width:800px;
 
-    margin:auto;
+margin:30px auto;
 
-    color:rgba(255,255,255,.88);
+font-size:1.15rem;
 
-    font-size:1.15rem;
+line-height:1.8;
 
-    line-height:1.9;
+color:#475569;
+
 }
+
+
+
+
+
+
+
+/* ==========================================================
+ STORY SECTION
+========================================================== */
+
+
+.storySection{
+
+padding:100px 0;
+
+background:white;
+
+}
+
+
+
+.storyGrid{
+
+display:grid;
+
+grid-template-columns:1fr 400px;
+
+gap:70px;
+
+align-items:center;
+
+}
+
+
+
+.storyGrid h2{
+
+font-size:3rem;
+
+margin-bottom:25px;
+
+}
+
+
+
+.storyGrid p{
+
+color:#64748b;
+
+font-size:1.1rem;
+
+line-height:1.8;
+
+}
+
+
+
+.storyBox{
+
+background:
+
+linear-gradient(
+135deg,
+#2563eb,
+#38bdf8
+);
+
+padding:40px;
+
+border-radius:30px;
+
+color:white;
+
+box-shadow:
+0 30px 70px rgba(37,99,235,.25);
+
+}
+
+
+
+.storyBox h3{
+
+font-size:2rem;
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================
+ MISSION VISION VALUES
+========================================================== */
+
+
 .aboutCards{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:30px;
-    padding:80px 0;
-}
-.aboutCard,.expertiseCard{
-background:#fff;border-radius:24px;padding:32px;
-box-shadow:0 12px 30px rgba(0,0,0,.08);
-transition:.3s}
-.aboutCard:hover,
-.expertiseCard:hover{
-    transform:translateY(-8px);
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:30px;
+
+padding:90px 0;
+
 }
 
-.whySection{padding:80px 0}
-.whyGrid{display:grid;grid-template-columns:1.1fr 1fr;gap:60px}
-.whyGrid ul{list-style:none;padding:0}
-.whyGrid li{display:flex;gap:12px;padding:14px 0}
-.expertiseGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-.ctaSection{padding:90px 0;background:linear-gradient(135deg,#323d58,#344269);text-align:center;color:#fff}
-.ctaButton{display:inline-block;padding:16px 38px;border-radius:999px;background:#2563eb;color:#fff;text-decoration:none}
+
+
+.aboutCard{
+
+background:white;
+
+padding:40px;
+
+border-radius:30px;
+
+border:1px solid #e2e8f0;
+
+box-shadow:
+
+0 20px 50px rgba(15,23,42,.08);
+
+transition:.4s;
+
+}
+
+
+
+.aboutCard:hover{
+
+transform:translateY(-12px);
+
+box-shadow:
+
+0 30px 70px rgba(37,99,235,.15);
+
+}
+
+
+
+.aboutCard svg{
+
+color:#2563eb;
+
+width:40px;
+height:40px;
+
+margin-bottom:20px;
+
+}
+
+
+
+.aboutCard h3{
+
+font-size:1.5rem;
+
+}
+
+
+
+.aboutCard p{
+
+color:#64748b;
+
+line-height:1.8;
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================
+ WHY CHOOSE
+========================================================== */
+
+
+.whySection{
+
+padding:100px 0;
+
+}
+
+
+
+.sectionHeading{
+
+text-align:center;
+
+max-width:750px;
+
+margin:auto;
+
+}
+
+
+
+.sectionHeading h2{
+
+font-size:3rem;
+
+}
+
+
+
+.sectionHeading p{
+
+color:#64748b;
+
+font-size:1.1rem;
+
+}
+
+
+
+
+
+.whyCards{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:25px;
+
+margin-top:60px;
+
+}
+
+
+
+.whyCard{
+
+background:white;
+
+padding:35px;
+
+border-radius:25px;
+
+border:1px solid #e2e8f0;
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+transition:.4s;
+
+}
+
+
+
+.whyCard svg{
+
+color:#2563eb;
+
+}
+
+
+
+.whyCard:hover{
+
+transform:translateY(-10px);
+
+box-shadow:
+
+0 25px 60px rgba(37,99,235,.15);
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================
+ PROCESS
+========================================================== */
+
+
+.processSection{
+
+padding:100px 0;
+
+background:white;
+
+}
+
+
+
+.processHeading{
+
+text-align:center;
+
+}
+
+
+
+.processHeading h2{
+
+font-size:3rem;
+
+}
+
+
+
+.processHeading p{
+
+color:#64748b;
+
+}
+
+
+
+
+
+.processGrid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:25px;
+
+margin-top:60px;
+
+}
+
+
+
+.processCard{
+
+padding:35px 25px;
+
+border-radius:25px;
+
+background:#f8fafc;
+
+border:1px solid #e2e8f0;
+
+transition:.4s;
+
+}
+
+
+
+.processIcon{
+
+width:65px;
+height:65px;
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+background:#dbeafe;
+
+color:#2563eb;
+
+border-radius:20px;
+
+margin-bottom:25px;
+
+}
+
+
+
+.processCard:hover{
+
+transform:translateY(-10px);
+
+box-shadow:
+
+0 25px 60px rgba(37,99,235,.15);
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================
+ VALUES
+========================================================== */
+
+
+.valuesSection{
+
+padding:100px 0;
+
+text-align:center;
+
+}
+
+
+
+.valuesSection h2{
+
+font-size:3rem;
+
+}
+
+
+
+.valuesGrid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:25px;
+
+margin-top:50px;
+
+}
+
+
+
+.valueCard{
+
+background:white;
+
+padding:35px;
+
+border-radius:25px;
+
+border:1px solid #e2e8f0;
+
+transition:.3s;
+
+}
+
+
+
+.valueCard svg{
+
+color:#2563eb;
+
+width:35px;
+
+height:35px;
+
+}
+
+
+
+.valueCard:hover{
+
+transform:translateY(-8px);
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================
+ STATS
+========================================================== */
+
+
+.statsSection{
+
+padding:70px 0;
+
+background:#eff6ff;
+
+}
+
+
+
+.statsGrid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+text-align:center;
+
+}
+
+
+
+.statsGrid h2{
+
+font-size:3rem;
+
+color:#2563eb;
+
+}
+
+
+
+.statsGrid p{
+
+color:#64748b;
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================
+ CTA
+========================================================== */
+
+
+.ctaSection{
+
+padding:100px 20px;
+
+text-align:center;
+
+background:
+
+linear-gradient(
+135deg,
+#2563eb,
+#38bdf8
+);
+
+color:white;
+
+}
+
+
+
+.ctaSection h2{
+
+font-size:3rem;
+
+}
+
+
+
+.ctaSection p{
+
+font-size:1.15rem;
+
+margin:25px 0 40px;
+
+}
+
+
+
+.ctaButton{
+
+display:inline-flex;
+
+padding:16px 45px;
+
+border-radius:50px;
+
+background:white;
+
+color:#2563eb;
+
+font-weight:700;
+
+text-decoration:none;
+
+transition:.3s;
+
+}
+
+
+
 .ctaButton:hover{
-    background:#1d4ed8;
-    transform:translateY(-3px);
-    transition:.3s ease;
-}
-@media (max-width:992px){
-    
-    .aboutCards,
-    .whyGrid{
-        grid-template-columns:1fr;
-    }
 
-    .expertiseGrid{
-        grid-template-columns:repeat(2,1fr);
-    }
+transform:translateY(-5px);
+
 }
 
-@media (max-width:768px){
 
-    .aboutHero h1{
-        font-size:2.4rem;
-    }
 
-    .aboutCards,
-    .expertiseGrid{
-        grid-template-columns:1fr;
-    }
+
+
+
+
+
+/* ==========================================================
+ RESPONSIVE
+========================================================== */
+
+
+@media(max-width:1100px){
+
+
+.storyGrid{
+
+grid-template-columns:1fr;
+
+}
+
+
+
+.processGrid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+
+
+.aboutCards,
+.whyCards,
+.valuesGrid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+
+
+.statsGrid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+
+
+@media(max-width:768px){
+
+
+.aboutHero h1{
+
+font-size:2.5rem;
+
+}
+
+
+
+.aboutCards,
+.whyCards,
+.valuesGrid,
+.processGrid,
+.statsGrid{
+
+grid-template-columns:1fr;
+
+}
+
+
+
+.storyGrid h2,
+.sectionHeading h2,
+.processHeading h2,
+.valuesSection h2,
+.ctaSection h2{
+
+font-size:2rem;
+
+}
+
+
 }

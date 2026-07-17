@@ -1,38 +1,5 @@
 /* ==========================================================
-   GOOGLE FONT
-========================================================== */
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
-
-
-/* ==========================================================
-   VARIABLES
-========================================================== */
-
-:root{
-
---primary:#2563eb;
---secondary:#60a5fa;
-
---dark:#0f172a;
-
---text:#475569;
-
---background:#f8fbff;
-
---white:#ffffff;
-
---radius:28px;
-
---shadow:
-0 25px 60px rgba(15,23,42,.12);
-
-}
-
-
-
-/* ==========================================================
-   SECTION
+   HEXONIQUE SERVICES TABLE PREMIUM DESIGN
 ========================================================== */
 
 
@@ -40,14 +7,9 @@
 
 position:relative;
 
-padding:120px 7%;
+padding:120px 20px;
 
-background:
-linear-gradient(
-180deg,
-#ffffff,
-#f8fbff
-);
+background:#f8fafc;
 
 overflow:hidden;
 
@@ -57,85 +19,108 @@ font-family:"Poppins",sans-serif;
 
 
 
-/* Floating Background */
 
 
-.services::before{
+/* ==========================================================
+   BACKGROUND ANIMATION
+========================================================== */
 
+
+.services::before,
+.services::after{
 
 content:"";
 
 position:absolute;
 
-width:500px;
-
-height:500px;
-
-right:-200px;
-
-top:-150px;
-
 border-radius:50%;
 
+filter:blur(90px);
 
-background:
-radial-gradient(
-circle,
-rgba(37,99,235,.18),
-transparent 70%
-);
-
-
-filter:blur(10px);
-
-animation:
-floatingOne 12s infinite ease-in-out;
-
+z-index:0;
 
 }
 
+
+
+.services::before{
+
+width:450px;
+
+height:450px;
+
+background:rgba(37,99,235,.15);
+
+top:-150px;
+
+right:-150px;
+
+animation:floatOne 10s infinite alternate;
+
+}
 
 
 
 .services::after{
 
+width:400px;
 
-content:"";
+height:400px;
 
-position:absolute;
+background:rgba(56,189,248,.18);
 
-width:420px;
+bottom:-150px;
 
-height:420px;
+left:-150px;
 
-left:-180px;
-
-bottom:-120px;
-
-border-radius:50%;
-
-
-background:
-radial-gradient(
-circle,
-rgba(96,165,250,.2),
-transparent 70%
-);
-
-
-animation:
-floatingTwo 14s infinite ease-in-out;
-
+animation:floatTwo 12s infinite alternate;
 
 }
 
 
 
 
-.services-container{
+
+@keyframes floatOne{
+
+from{
+transform:translateY(0);
+}
+
+to{
+transform:translateY(60px);
+}
+
+}
 
 
-max-width:1320px;
+
+@keyframes floatTwo{
+
+from{
+transform:translateY(0);
+}
+
+to{
+transform:translateY(-60px);
+}
+
+}
+
+
+
+
+
+
+
+/* ==========================================================
+ CONTAINER
+========================================================== */
+
+
+.container{
+
+width:min(1200px,90%);
 
 margin:auto;
 
@@ -149,290 +134,216 @@ z-index:2;
 
 
 
+
+
+
 /* ==========================================================
- HEADER
+ HEADING
 ========================================================== */
 
 
-.services-header{
-
-
-max-width:760px;
-
-margin:auto;
+.heading{
 
 text-align:center;
 
-margin-bottom:80px;
+max-width:850px;
 
+margin:auto;
 
 }
 
 
 
-.services-badge{
+.heading span{
 
 
-display:inline-block;
+display:inline-flex;
 
-padding:10px 24px;
+padding:10px 28px;
 
 border-radius:50px;
 
-background:#dbeafe;
+background:#eff6ff;
 
-color:var(--primary);
+border:1px solid #bfdbfe;
 
-font-size:14px;
+color:#2563eb;
 
-font-weight:700;
+font-size:.8rem;
 
-letter-spacing:1px;
+font-weight:800;
 
-
-}
-
-
-
-.services-header h2{
-
-
-margin-top:28px;
-
-
-font-size:48px;
-
-font-weight:700;
-
-line-height:1.25;
-
-color:var(--dark);
-
-
-}
-
-
-
-.services-header p{
-
-
-margin-top:25px;
-
-
-font-size:17px;
-
-line-height:1.8;
-
-color:var(--text);
-
+letter-spacing:2px;
 
 }
 
 
 
 
+.heading h2{
 
-/* ==========================================================
- GRID
-========================================================== */
 
+margin:25px 0;
 
-.services-grid{
 
+font-size:clamp(2.5rem,5vw,3.8rem);
 
-display:grid;
 
+line-height:1.15;
 
-grid-template-columns:
 
-repeat(3,1fr);
-
-
-gap:40px;
-
-
-}
-
-
-
-
-
-/* ==========================================================
- CARD
-========================================================== */
-
-
-.service-card{
-
-
-position:relative;
-
-border-radius:var(--radius);
-
-transition:.4s ease;
-
-
-}
-
-
-
-
-/* ==========================================================
- IMAGE
-========================================================== */
-
-
-.service-image{
-
-
-height:260px;
-
-border-radius:var(--radius);
-
-overflow:hidden;
-
-
-box-shadow:
-
-0 20px 45px rgba(15,23,42,.12);
-
-
-}
-
-
-
-.service-image img{
-
-
-width:100%;
-
-height:100%;
-
-object-fit:cover;
-
-
-transition:.7s ease;
-
-
-}
-
-
-
-.service-card:hover 
-.service-image img{
-
-
-transform:scale(1.12);
-
-
-}
-
-
-
-
-
-/* ==========================================================
- CONTENT CARD
-========================================================== */
-
-
-.service-content{
-
-
-position:relative;
-
-
-margin:-45px 20px 0;
-
-
-padding:32px;
-
-
-background:
-rgba(255,255,255,.95);
-
-
-backdrop-filter:blur(20px);
-
-
-border-radius:24px;
-
-
-box-shadow:var(--shadow);
-
-
-min-height:320px;
-
-
-display:flex;
-
-flex-direction:column;
-
-
-transition:.4s ease;
-
-
-overflow:hidden;
-
-
-}
-
-
-
-.service-card:hover 
-.service-content{
-
-
-transform:translateY(-10px);
-
-
-box-shadow:
-
-0 35px 80px rgba(37,99,235,.2);
-
-
-}
-
-
-
-
-/* Glow Border */
-
-
-.service-content::before{
-
-
-content:"";
-
-position:absolute;
-
-inset:0;
-
-border-radius:24px;
-
-padding:1px;
+font-weight:900;
 
 
 background:
 
 linear-gradient(
-135deg,
-transparent,
-#60a5fa,
-transparent
+90deg,
+#0f172a,
+#2563eb
 );
 
 
--webkit-mask:
-
-linear-gradient(#fff 0 0) content-box,
-linear-gradient(#fff 0 0);
+-webkit-background-clip:text;
 
 
--webkit-mask-composite:xor;
+color:transparent;
 
 
-opacity:0;
+}
+
+
+
+
+.heading p{
+
+
+font-size:1.1rem;
+
+
+line-height:1.8;
+
+
+color:#64748b;
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================
+ SERVICES TABLE GRID
+========================================================== */
+
+
+.servicesTable{
+
+
+margin-top:70px;
+
+
+display:grid;
+
+
+grid-template-columns:repeat(3,1fr);
+
+
+border-top:1px solid #dbeafe;
+
+
+border-left:1px solid #dbeafe;
+
+
+background:white;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================
+ SERVICE BOX
+========================================================== */
+
+
+.serviceBox{
+
+
+position:relative;
+
+
+padding:45px 35px;
+
+
+min-height:330px;
+
+
+background:rgba(255,255,255,.9);
+
+
+border-right:1px solid #dbeafe;
+
+
+border-bottom:1px solid #dbeafe;
+
+
+display:flex;
+
+
+flex-direction:column;
+
+
+transition:.45s;
+
+
+overflow:hidden;
+
+
+}
+
+
+
+
+
+.serviceBox::before{
+
+
+content:"";
+
+
+position:absolute;
+
+
+width:150px;
+
+
+height:150px;
+
+
+border-radius:50%;
+
+
+background:#dbeafe;
+
+
+right:-80px;
+
+
+top:-80px;
+
+
+opacity:.5;
 
 
 transition:.4s;
@@ -442,14 +353,79 @@ transition:.4s;
 
 
 
-.service-card:hover 
-.service-content::before{
 
 
-opacity:1;
+.serviceBox:hover::before{
+
+
+transform:scale(1.4);
 
 
 }
+
+
+
+
+
+.serviceBox:hover{
+
+
+background:#f8fbff;
+
+
+transform:translateY(-10px);
+
+
+box-shadow:
+
+
+0 25px 60px rgba(37,99,235,.15);
+
+
+}
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================
+ NUMBER
+========================================================== */
+
+
+.number{
+
+
+position:absolute;
+
+
+right:25px;
+
+
+top:20px;
+
+
+font-size:4.5rem;
+
+
+font-weight:900;
+
+
+line-height:1;
+
+
+color:#dbeafe;
+
+
+}
+
+
+
 
 
 
@@ -460,17 +436,20 @@ opacity:1;
 ========================================================== */
 
 
-.service-icon{
+.icon{
 
 
 width:75px;
+
 
 height:75px;
 
 
 display:flex;
 
+
 align-items:center;
+
 
 justify-content:center;
 
@@ -480,149 +459,162 @@ border-radius:22px;
 
 background:
 
+
 linear-gradient(
 135deg,
 #2563eb,
-#60a5fa
+#38bdf8
 );
 
 
 color:white;
 
 
-font-size:30px;
+font-size:32px;
+
+
+margin-bottom:35px;
+
+
+box-shadow:
+
+0 20px 40px rgba(37,99,235,.25);
+
+
+transition:.4s;
+
+
+}
+
+
+
+
+
+.serviceBox:hover .icon{
+
+
+transform:
+
+rotate(-10deg)
+scale(1.12);
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================
+ CONTENT
+========================================================== */
+
+
+.serviceBox h3{
+
+
+font-size:1.45rem;
+
+
+font-weight:800;
+
+
+color:#0f172a;
+
+
+line-height:1.4;
+
+
+margin-bottom:15px;
+
+
+max-width:280px;
+
+
+}
+
+
+
+
+.serviceBox p{
+
+
+font-size:1rem;
+
+
+line-height:1.8;
+
+
+color:#64748b;
+
+
+max-width:320px;
 
 
 margin-bottom:25px;
 
 
-box-shadow:
-
-0 15px 35px rgba(37,99,235,.3);
-
-
-transition:.4s;
-
-
-}
-
-
-
-.service-card:hover 
-.service-icon{
-
-
-transform:
-rotate(-10deg)
-scale(1.1);
-
-
 }
 
 
 
 
-/* ==========================================================
- TEXT
-========================================================== */
-
-
-.service-content h3{
-
-
-font-size:28px;
-
-font-weight:700;
-
-color:var(--dark);
-
-margin-bottom:15px;
-
-
-}
-
-
-
-.service-content p{
-
-
-font-size:17px;
-
-line-height:1.8;
-
-color:var(--text);
-
-
-flex:1;
-
-
-}
 
 
 
 
 
 /* ==========================================================
- BUTTON
+ LINK
 ========================================================== */
 
 
-.service-link{
+.link{
 
 
-display:flex;
+margin-top:auto;
+
+
+display:inline-flex;
+
 
 align-items:center;
+
 
 gap:10px;
 
 
-margin-top:25px;
+color:#2563eb;
 
 
-color:var(--primary);
-
-
-font-weight:600;
+font-weight:800;
 
 
 text-decoration:none;
 
 
-transition:.4s;
+transition:.3s;
 
 
 }
 
 
 
-.service-link svg{
+.link:hover{
 
 
-transition:.4s;
-
-
-}
-
-
-
-.service-link:hover{
-
-
-gap:16px;
+gap:18px;
 
 
 }
 
 
 
-.service-link:hover svg{
 
-
-transform:translateX(7px);
-
-
-}
 
 
 
@@ -633,28 +625,27 @@ transform:translateX(7px);
 ========================================================== */
 
 
-.services-cta{
+.footer{
 
 
-margin-top:120px;
+margin-top:110px;
 
 
-padding:90px 60px;
-
-
-border-radius:32px;
+padding:75px 40px;
 
 
 text-align:center;
+
+
+border-radius:35px;
 
 
 background:
 
 linear-gradient(
 135deg,
-#0f172a,
-#1e40af,
-#2563eb
+#2563eb,
+#38bdf8
 );
 
 
@@ -663,37 +654,8 @@ color:white;
 
 box-shadow:
 
-0 40px 80px rgba(37,99,235,.25);
 
-
-}
-
-
-
-
-.services-cta h3{
-
-
-font-size:44px;
-
-font-weight:800;
-
-
-}
-
-
-
-.services-cta p{
-
-
-margin-top:20px;
-
-
-font-size:18px;
-
-
-color:
-rgba(255,255,255,.9);
+0 30px 70px rgba(37,99,235,.25);
 
 
 }
@@ -702,7 +664,51 @@ rgba(255,255,255,.9);
 
 
 
-.cta-button{
+.footer h3{
+
+
+font-size:2.8rem;
+
+
+font-weight:900;
+
+
+margin-bottom:20px;
+
+
+}
+
+
+
+
+
+.footer p{
+
+
+max-width:720px;
+
+
+margin:0 auto 35px;
+
+
+font-size:1.1rem;
+
+
+line-height:1.8;
+
+
+color:#eff6ff;
+
+
+}
+
+
+
+
+
+
+
+.button{
 
 
 display:inline-flex;
@@ -714,50 +720,22 @@ align-items:center;
 gap:12px;
 
 
-margin-top:40px;
-
-
-padding:18px 42px;
-
-
-border-radius:50px;
+padding:17px 45px;
 
 
 background:white;
 
 
-color:var(--primary);
+color:#2563eb;
 
 
-font-weight:700;
+border-radius:50px;
+
+
+font-weight:800;
 
 
 text-decoration:none;
-
-
-transition:.4s;
-
-
-}
-
-
-
-.cta-button:hover{
-
-
-transform:translateY(-8px);
-
-
-box-shadow:
-
-0 25px 50px rgba(0,0,0,.25);
-
-
-}
-
-
-
-.cta-button svg{
 
 
 transition:.3s;
@@ -766,13 +744,24 @@ transition:.3s;
 }
 
 
-.cta-button:hover svg{
+
+.button:hover{
 
 
-transform:translateX(8px);
+transform:translateY(-6px);
+
+
+box-shadow:
+
+0 20px 40px rgba(255,255,255,.35);
 
 
 }
+
+
+
+
+
 
 
 
@@ -783,10 +772,10 @@ transform:translateX(8px);
 ========================================================== */
 
 
-@media(max-width:1100px){
+@media(max-width:1000px){
 
 
-.services-grid{
+.servicesTable{
 
 
 grid-template-columns:repeat(2,1fr);
@@ -800,152 +789,78 @@ grid-template-columns:repeat(2,1fr);
 
 
 
-@media(max-width:768px){
+
+@media(max-width:700px){
 
 
 .services{
 
 
-padding:80px 20px;
+padding:90px 20px;
 
 
 }
 
 
 
-.services-header h2{
-
-
-font-size:34px;
-
-
-}
-
-
-
-.services-grid{
+.servicesTable{
 
 
 grid-template-columns:1fr;
 
 
-gap:35px;
+}
+
+
+
+.heading h2{
+
+
+font-size:2.2rem;
 
 
 }
 
 
 
-.service-image{
+.serviceBox{
 
 
-height:230px;
+min-height:auto;
 
 
-}
-
-
-
-.service-content{
-
-
-margin:-40px 15px 0;
-
-
-padding:25px;
+padding:35px 25px;
 
 
 }
 
 
 
-.service-content h3{
+.number{
 
 
-font-size:24px;
-
-
-}
-
-
-
-.services-cta{
-
-
-padding:60px 25px;
+font-size:3.5rem;
 
 
 }
 
 
 
-.services-cta h3{
+.footer{
 
 
-font-size:30px;
-
-
-}
-
-
-
-.cta-button{
-
-
-width:100%;
-
-justify-content:center;
-
-
-}
+padding:50px 25px;
 
 
 }
 
 
 
-
-/* ==========================================================
- ANIMATIONS
-========================================================== */
+.footer h3{
 
 
-@keyframes floatingOne{
+font-size:2rem;
 
-
-0%,
-100%{
-
-transform:translateY(0);
-
-}
-
-
-50%{
-
-transform:translateY(40px);
-
-}
-
-
-}
-
-
-
-@keyframes floatingTwo{
-
-
-0%,
-100%{
-
-transform:translateY(0);
-
-}
-
-
-50%{
-
-transform:translateY(-35px);
 
 }
 
