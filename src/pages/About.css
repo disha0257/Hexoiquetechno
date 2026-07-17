@@ -1,0 +1,144 @@
+/* About.css
+   Premium starter stylesheet matching About.jsx.
+   NOTE: Replace hero background image path if needed.
+*/
+.about{background:#f8fafc;color:#0f172a}
+.container{
+    width:min(1180px,90%);
+    margin:auto;
+}
+.aboutHero{
+    min-height:85vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:140px 20px 100px;
+
+    background:linear-gradient(
+    135deg,
+    #bfdbfe,
+    #4d6d94,
+    #1f2c42
+    );
+}
+.sectionTitle{
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:12px 26px;
+
+    border-radius:50px;
+
+    background:rgba(255,255,255,.12);
+
+    color:#60a5fa;
+
+    border:1px solid rgba(255,255,255,.18);
+
+    backdrop-filter:blur(10px);
+
+    letter-spacing:4px;
+
+    font-size:.8rem;
+
+    font-weight:700;
+
+    margin-bottom:28px;
+}
+.aboutHero h1{
+
+    max-width:900px;
+
+    margin:auto;
+
+    font-size:clamp(3rem,5vw,4.8rem);
+
+    line-height:1.1;
+
+    color:#ffffff;
+
+    font-weight:800;
+
+    margin-bottom:30px;
+}
+.aboutHero h1 span{
+
+    display:block;
+
+    margin-top:8px;
+
+    background:linear-gradient(
+        90deg,
+        #60a5fa,
+        #38bdf8
+    );
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+}
+.aboutHero p{
+
+    max-width:760px;
+
+    margin:auto;
+
+    color:rgba(255,255,255,.88);
+
+    font-size:1.15rem;
+
+    line-height:1.9;
+}
+.aboutCards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+    padding:80px 0;
+}
+.aboutCard,.expertiseCard{
+background:#fff;border-radius:24px;padding:32px;
+box-shadow:0 12px 30px rgba(0,0,0,.08);
+transition:.3s}
+.aboutCard:hover,
+.expertiseCard:hover{
+    transform:translateY(-8px);
+}
+
+.whySection{padding:80px 0}
+.whyGrid{display:grid;grid-template-columns:1.1fr 1fr;gap:60px}
+.whyGrid ul{list-style:none;padding:0}
+.whyGrid li{display:flex;gap:12px;padding:14px 0}
+.expertiseGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.ctaSection{padding:90px 0;background:linear-gradient(135deg,#323d58,#344269);text-align:center;color:#fff}
+.ctaButton{display:inline-block;padding:16px 38px;border-radius:999px;background:#2563eb;color:#fff;text-decoration:none}
+.ctaButton:hover{
+    background:#1d4ed8;
+    transform:translateY(-3px);
+    transition:.3s ease;
+}
+@media (max-width:992px){
+    
+    .aboutCards,
+    .whyGrid{
+        grid-template-columns:1fr;
+    }
+
+    .expertiseGrid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media (max-width:768px){
+
+    .aboutHero h1{
+        font-size:2.4rem;
+    }
+
+    .aboutCards,
+    .expertiseGrid{
+        grid-template-columns:1fr;
+    }
+}
