@@ -1,12 +1,16 @@
 import "./WhyChoose.css";
+
 import { motion } from "framer-motion";
+import { useRef, useState } from "react";
+
 import {
-  FaShieldAlt,
-  FaUsers,
   FaRocket,
+  FaUsers,
+  FaShieldAlt,
   FaHeadset,
   FaClock,
   FaAward,
+  FaArrowRight,
 } from "react-icons/fa";
 
 const features = [
@@ -14,116 +18,224 @@ const features = [
     icon: <FaRocket />,
     title: "Modern Technology",
     description:
-      "We build scalable, high-performance applications using the latest technologies and industry best practices.",
+      "Building future-ready applications with React, Node.js, AI, Cloud and modern development practices.",
   },
   {
     icon: <FaUsers />,
     title: "Expert Team",
     description:
-      "Our experienced developers, designers, and consultants deliver innovative digital solutions tailored to your business.",
+      "Experienced developers, designers and consultants delivering world-class digital products.",
   },
   {
     icon: <FaShieldAlt />,
     title: "Secure Development",
     description:
-      "Security is integrated into every stage of development, ensuring reliable and protected digital products.",
+      "Security-first architecture with best coding practices, encryption and reliable infrastructure.",
   },
   {
     icon: <FaClock />,
     title: "On-Time Delivery",
     description:
-      "Efficient project planning and agile workflows help us deliver quality projects within deadlines.",
+      "Agile workflow, transparent communication and timely project delivery every time.",
   },
   {
     icon: <FaHeadset />,
-    title: "24/7 Support",
+    title: "24×7 Support",
     description:
-      "Our dedicated support team is always available to assist you with maintenance and technical guidance.",
+      "Continuous monitoring, maintenance and technical support whenever you need us.",
   },
   {
     icon: <FaAward />,
     title: "Quality Assurance",
     description:
-      "Every project undergoes thorough testing and quality checks before deployment for the best user experience.",
+      "Every project undergoes thorough testing for performance, security and user experience.",
+  },
+];
+
+const stats = [
+  {
+    number: "150+",
+    label: "Projects Delivered",
+  },
+  {
+    number: "98%",
+    label: "Client Satisfaction",
+  },
+  {
+    number: "24/7",
+    label: "Technical Support",
   },
 ];
 
 function WhyChoose() {
+  const sectionRef = useRef(null);
+
+  const [mouse, setMouse] = useState({
+    x: 0,
+    y: 0,
+  });
+
+  const handleMouseMove = (e) => {
+    const rect = sectionRef.current.getBoundingClientRect();
+
+    setMouse({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
   return (
-    <section className="why-section">
-      <div className="why-container">
-        {/* Left Content */}
-        <motion.div
-          className="why-left"
-          initial={{ opacity: 0, x: -80 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-        >
-          <span className="section-tag">WHY CHOOSE HEXONIQUE</span>
+  <section
+    className="why-section"
+    ref={sectionRef}
+    onMouseMove={handleMouseMove}
+  >
+    {/* Mouse Glow */}
+    <div
+      className="mouse-glow"
+      style={{
+        left: mouse.x,
+        top: mouse.y,
+      }}
+    />
 
-          <h2>
-            Delivering Innovative
-            <br />
-            Digital Solutions
-          </h2>
+    {/* Background Blur */}
+    <div className="bg-circle bg1"></div>
+    <div className="bg-circle bg2"></div>
+    <div className="bg-circle bg3"></div>
 
-          <p>
-            Hexonique empowers businesses with cutting-edge technology,
-            modern design, and reliable software solutions. We focus on
-            innovation, performance, and customer satisfaction to help your
-            business grow in the digital world.
-          </p>
+    <div className="why-container">
 
-          <div className="stats">
-            <div className="stat-card">
-              <h3>100+</h3>
-              <p>Projects</p>
-            </div>
+      {/* ================= LEFT ================= */}
 
-            <div className="stat-card">
-              <h3>50+</h3>
-              <p>Happy Clients</p>
-            </div>
+      <motion.div
+        className="why-left"
+        initial={{ opacity: 0, x: -60 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
+        <span className="section-tag">
+          WHY CHOOSE HEXONIQUE
+        </span>
 
-            <div className="stat-card">
-              <h3>5+</h3>
-              <p>Years Experience</p>
-            </div>
+        <h2>
+          Building
+          <span> Future-Ready </span>
+          Digital Products
+          For Modern Businesses.
+        </h2>
 
-            <div className="stat-card">
-              <h3>24/7</h3>
-              <p>Support</p>
-            </div>
-          </div>
-        </motion.div>
+        <p>
+          We combine innovative technology, creative design and
+          engineering excellence to build scalable software,
+          websites, mobile applications and AI-powered solutions
+          that accelerate business growth.
+        </p>
 
-        {/* Right Cards */}
-        <motion.div
-          className="why-right"
-          initial={{ opacity: 0, x: 80 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          {features.map((item, index) => (
+        {/* Statistics */}
+
+        <div className="stats-grid">
+          {stats.map((item, index) => (
             <motion.div
-              className="feature-card"
               key={index}
-              whileHover={{ y: -8, scale: 1.02 }}
+              className="stat-card"
+              whileHover={{
+                y: -8,
+                scale: 1.03,
+              }}
             >
-              <div className="feature-icon">{item.icon}</div>
+              <h3>{item.number}</h3>
 
-              <div>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </div>
+              <span>{item.label}</span>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
+
+        {/* CTA */}
+
+        <motion.button
+          className="why-btn"
+          whileHover={{
+            scale: 1.05,
+          }}
+          whileTap={{
+            scale: 0.95,
+          }}
+        >
+          Start Your Project
+
+          <FaArrowRight />
+        </motion.button>
+
+      </motion.div>
+
+      {/* ================= RIGHT ================= */}
+
+<motion.div
+  className="why-right"
+  initial={{ opacity: 0, x: 60 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.8 }}
+  viewport={{ once: true }}
+>
+
+  {features.map((item, index) => (
+    <motion.div
+      key={index}
+      className={`feature-card card${index + 1}`}
+      initial={{
+        opacity: 0,
+        y: 40,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+      transition={{
+        duration: 0.5,
+        delay: index * 0.1,
+      }}
+      whileHover={{
+        y: -12,
+        scale: 1.03,
+        rotate: index % 2 === 0 ? -1 : 1,
+      }}
+      viewport={{ once: true }}
+    >
+      <div className="feature-top">
+
+        <div className="feature-icon">
+          {item.icon}
+        </div>
+
+        <span className="feature-number">
+          0{index + 1}
+        </span>
+
       </div>
-    </section>
-  );
+
+      <h3>{item.title}</h3>
+
+      <p>{item.description}</p>
+
+      <div className="feature-line"></div>
+
+      <div className="feature-footer">
+
+        <span>Learn More</span>
+
+        <FaArrowRight />
+
+      </div>
+
+    </motion.div>
+  ))}
+
+</motion.div>
+
+    </div>
+  </section>
+);
 }
 
 export default WhyChoose;

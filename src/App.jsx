@@ -14,6 +14,7 @@ import Contact from "./pages/Contact";
 import Header from "./components/Header/Header";
 import Loader from "./components/Loader/Loader";
 import ScrollProgress from "./components/ScrollProgress/ScrollProgress";
+import ServiceDetails from "./pages/ServiceDetails";
 
 import useLenis from "./hooks/useLenis";
 
@@ -87,6 +88,11 @@ element={<Services/>}
 
 />
 
+
+<Route
+  path="/services/:slug"
+  element={<ServiceDetails />}
+/>
 
 
 {/* IMPORTANT:
