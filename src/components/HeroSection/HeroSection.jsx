@@ -1,11 +1,13 @@
 import "./HeroSection.css";
 import { FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 function HeroSection() {
+  const navigate = useNavigate();
+
   return (
     <section className="hero">
-
       {/* Background Video */}
       <video
         className="hero-video"
@@ -26,14 +28,12 @@ function HeroSection() {
       <div className="circle circle3"></div>
 
       <div className="hero-container">
-
         <motion.div
           className="hero-content"
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: .8 }}
+          transition={{ duration: 0.8 }}
         >
-
           <span className="badge">
             🚀 Modern IT Solutions
           </span>
@@ -51,28 +51,30 @@ function HeroSection() {
           </p>
 
           <div className="hero-buttons">
-
-            <button className="primary-btn">
+            <button
+              type="button"
+              className="primary-btn"
+              onClick={() => navigate("/contact")}
+            >
               Get Started
               <FaArrowRight />
             </button>
 
-            <button className="secondary-btn">
-              Our Services
-            </button>
-
+            <button
+  type="button"
+  className="secondary-btn"
+  onClick={() => navigate("/services")}
+>
+  Our Services
+</button>
           </div>
-
         </motion.div>
-
       </div>
 
       {/* Scroll Indicator */}
-
       <div className="scroll-down">
         <span></span>
       </div>
-
     </section>
   );
 }

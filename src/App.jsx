@@ -15,7 +15,7 @@ import Header from "./components/Header/Header";
 import Loader from "./components/Loader/Loader";
 import ScrollProgress from "./components/ScrollProgress/ScrollProgress";
 import ServiceDetails from "./pages/ServiceDetails";
-
+import Privacy from "./pages/Privacy";
 import useLenis from "./hooks/useLenis";
 
 
@@ -108,7 +108,10 @@ element={<BlogDetails/>}
 
 />
 
-
+<Route 
+path="/privacy" 
+element={<Privacy />} 
+/>
 
 <Route
 
