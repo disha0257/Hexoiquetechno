@@ -609,8 +609,8 @@ hexoniquetechno@gmail.com
 <h3>Phone</h3>
 
 <p>
-<a href="tel:+9195863XXXXX">
-+91 95863 XXXXX
+<a href="tel:+919586347364">
++91 95863 47364
 </a>
 </p>
 

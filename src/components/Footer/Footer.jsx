@@ -52,8 +52,8 @@ function Footer() {
         <div className={styles.column}>
           <h4>Contact</h4>
 
-          <p>hello@hexonique.com</p>
-          <p>+91 98765 43210</p>
+          <p>hexoniquetechno@gmail.com</p>
+          <p>+91 95863 47364</p>
 
           <div className={styles.socialRow}>
             <a
