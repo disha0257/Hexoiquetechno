@@ -3,7 +3,6 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import connectDB from "./config/db.js";
-
 import contactRoutes from "./routes/contactRoutes.js";
 
 dotenv.config();
@@ -11,32 +10,94 @@ dotenv.config();
 const app = express();
 
 
-// Connect MongoDB
-connectDB();
+// ==========================================
+// CORS
+// ==========================================
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "https://hexoniquetechnology.netlify.app",
+];
 
-// Middleware
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: function (origin, callback) {
+
+      // Allow requests without origin
+      // Example: Postman or server-to-server
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(
+        new Error("Not allowed by CORS")
+      );
+
+    },
+
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+    ],
+
+    credentials: true,
+
   })
 );
+
+
+// ==========================================
+// MIDDLEWARE
+// ==========================================
 
 app.use(express.json());
 
 
-// Routes
+// ==========================================
+// DATABASE
+// ==========================================
+
+connectDB();
+
+
+// ==========================================
+// ROUTES
+// ==========================================
+
 app.use("/api/contact", contactRoutes);
 
 
-// Test route
+// ==========================================
+// TEST ROUTE
+// ==========================================
+
 app.get("/", (req, res) => {
-  res.send("Hexonique Backend API Running");
+
+  res.json({
+    success: true,
+    message: "Hexonique Backend API Running",
+  });
+
 });
 
 
+// ==========================================
+// SERVER
+// ==========================================
+
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+
+  console.log(
+    `Server running on port ${PORT}`
+  );
+
 });
