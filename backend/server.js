@@ -9,6 +9,17 @@ dotenv.config();
 
 const app = express();
 
+// ==========================================
+// DATABASE
+// ==========================================
+connectDB();
+
+// ==========================================
+// MIDDLEWARE
+// ==========================================
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // ==========================================
 // CORS
@@ -22,71 +33,63 @@ const allowedOrigins = [
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-
-      // Allow requests without origin
-      // Example: Postman or server-to-server
-      if (!origin) {
-        return callback(null, true);
-      }
+    origin(origin, callback) {
+      // Allow Postman, mobile apps, etc.
+      if (!origin) return callback(null, true);
 
       if (allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
 
-      return callback(
-        new Error("Not allowed by CORS")
-      );
+      console.log("Blocked Origin:", origin);
 
+      return callback(new Error("CORS Not Allowed"));
     },
-
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-
-    allowedHeaders: [
-      "Content-Type",
-      "Authorization",
-    ],
-
     credentials: true,
-
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-
-// ==========================================
-// MIDDLEWARE
-// ==========================================
-
-app.use(express.json());
-
-
-// ==========================================
-// DATABASE
-// ==========================================
-
-connectDB();
-
+// Handle preflight requests
+app.options("*", cors());
 
 // ==========================================
 // ROUTES
 // ==========================================
 
-app.use("/api/contact", contactRoutes);
-
-
-// ==========================================
-// TEST ROUTE
-// ==========================================
-
 app.get("/", (req, res) => {
-
   res.json({
     success: true,
     message: "Hexonique Backend API Running",
   });
-
 });
 
+app.use("/api/contact", contactRoutes);
+
+// ==========================================
+// 404
+// ==========================================
+
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "Route Not Found",
+  });
+});
+
+// ==========================================
+// ERROR HANDLER
+// ==========================================
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+
+  res.status(500).json({
+    success: false,
+    message: err.message || "Internal Server Error",
+  });
+});
 
 // ==========================================
 // SERVER
@@ -95,9 +98,5 @@ app.get("/", (req, res) => {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, "0.0.0.0", () => {
-
-  console.log(
-    `Server running on port ${PORT}`
-  );
-
+  console.log(`🚀 Server running on port ${PORT}`);
 });
