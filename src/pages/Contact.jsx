@@ -23,758 +23,927 @@ import {
 
 function Contact() {
 
+  const navigate = useNavigate();
 
-const navigate = useNavigate();
+  const formRef = useRef(null);
 
-const formRef = useRef(null);
 
+  // ==========================================
+  // FORM DATA
+  // ==========================================
 
-const [formData,setFormData] = useState({
-  name:"",
-  email:"",
-  company:"",
-  phone:"",
-  message:""
-});
+  const [formData, setFormData] = useState({
 
+    name: "",
 
-const [errors,setErrors] = useState({});
+    email: "",
 
-const [success,setSuccess] = useState("");
+    company: "",
 
+    phone: "",
 
+    message: "",
 
-// scroll form
+  });
 
-const scrollToForm = ()=>{
 
-formRef.current?.scrollIntoView({
-behavior:"smooth",
-block:"start"
-});
+  // ==========================================
+  // STATES
+  // ==========================================
 
-};
+  const [errors, setErrors] = useState({});
 
+  const [success, setSuccess] = useState("");
 
+  const [loading, setLoading] = useState(false);
 
-// input change
 
-const handleChange=(e)=>{
+  // ==========================================
+  // SCROLL TO FORM
+  // ==========================================
 
-const {name,value}=e.target;
+  const scrollToForm = () => {
 
+    formRef.current?.scrollIntoView({
 
+      behavior: "smooth",
 
-// phone only number
+      block: "start",
 
-if(name==="phone"){
+    });
 
-if(!/^[0-9]*$/.test(value)) return;
+  };
 
-if(value.length>10) return;
 
-}
+  // ==========================================
+  // INPUT CHANGE
+  // ==========================================
 
+  const handleChange = (e) => {
 
+    const { name, value } = e.target;
 
-setFormData({
 
-...formData,
+    // Phone only numbers
+    if (name === "phone") {
 
-[name]:value
+      if (!/^[0-9]*$/.test(value)) {
 
-});
+        return;
 
+      }
 
+      if (value.length > 10) {
 
-setErrors({
+        return;
 
-...errors,
+      }
 
-[name]:""
+    }
 
-});
 
+    setFormData((previousData) => ({
 
-};
+      ...previousData,
 
+      [name]: value,
 
+    }));
 
 
-// validation
+    setErrors((previousErrors) => ({
 
-const validate=()=>{
+      ...previousErrors,
 
+      [name]: "",
 
-let newErrors={};
+      submit: "",
 
+    }));
 
+  };
 
-// name
 
-if(!formData.name.trim()){
+  // ==========================================
+  // VALIDATION
+  // ==========================================
 
-newErrors.name="Name is required";
+  const validate = () => {
 
-}
+    const newErrors = {};
 
 
+    // Name
+    if (!formData.name.trim()) {
 
-// email
+      newErrors.name = "Name is required";
 
-const emailRegex =
-/^[a-zA-Z0-9._%+-]+@(gmail|yahoo|outlook|hotmail|icloud)\.(com|in)$/;
+    }
 
 
+    // Email
+    const emailRegex =
+      /^[a-zA-Z0-9._%+-]+@(gmail|yahoo|outlook|hotmail|icloud)\.(com|in)$/;
 
-if(!formData.email.trim()){
 
-newErrors.email="Email is required";
+    if (!formData.email.trim()) {
 
-}
+      newErrors.email = "Email is required";
 
-else if(!emailRegex.test(formData.email)){
+    }
 
-newErrors.email="Enter valid email address";
+    else if (!emailRegex.test(formData.email.trim())) {
 
-}
+      newErrors.email =
+        "Enter a valid Gmail, Yahoo, Outlook, Hotmail or iCloud email";
 
+    }
 
 
-// company
+    // Company
+    if (!formData.company.trim()) {
 
-if(!formData.company.trim()){
+      newErrors.company =
+        "Company name is required";
 
-newErrors.company="Company name is required";
+    }
 
-}
 
+    // Phone
+    if (!formData.phone.trim()) {
 
+      newErrors.phone =
+        "Phone number is required";
 
-// phone
+    }
 
+    else if (formData.phone.length !== 10) {
 
-if(!formData.phone.trim()){
+      newErrors.phone =
+        "Enter a 10 digit mobile number";
 
-newErrors.phone="Phone number required";
+    }
 
-}
 
-else if(formData.phone.length!==10){
+    // Message
+    if (!formData.message.trim()) {
 
-newErrors.phone="Enter 10 digit mobile number";
+      newErrors.message =
+        "Project details are required";
 
-}
+    }
 
+    else if (formData.message.trim().length < 20) {
 
+      newErrors.message =
+        "Minimum 20 characters required";
 
-// message
+    }
 
 
-if(!formData.message.trim()){
+    setErrors(newErrors);
 
-newErrors.message="Project details required";
 
-}
+    return Object.keys(newErrors).length === 0;
 
-else if(formData.message.length < 20){
+  };
 
-newErrors.message="Minimum 20 characters required";
 
-}
+  // ==========================================
+  // SUBMIT FORM
+  // ==========================================
 
+  const handleSubmit = async (e) => {
 
+    e.preventDefault();
 
-setErrors(newErrors);
 
+    // Validate
+    if (!validate()) {
 
-return Object.keys(newErrors).length===0;
+      return;
 
+    }
 
-};
 
+    setLoading(true);
 
+    setSuccess("");
 
+    setErrors({});
 
 
-// submit
+    try {
 
-const handleSubmit=(e)=>{
+      const response = await fetch(
 
-e.preventDefault();
+        "http://localhost:5000/api/contact",
 
+        {
 
+          method: "POST",
 
-if(validate()){
+          headers: {
 
+            "Content-Type":
+              "application/json",
 
-setSuccess(
-"Thank you! Your request has been submitted successfully."
-);
+          },
 
+          body: JSON.stringify(formData),
 
+        }
 
-setFormData({
+      );
 
-name:"",
-email:"",
-company:"",
-phone:"",
-message:""
 
-});
+      const data = await response.json();
 
 
+      console.log(
+        "Backend Response:",
+        data
+      );
 
-setTimeout(()=>{
 
-setSuccess("");
+      if (!response.ok) {
 
-},4000);
+        throw new Error(
 
+          data.message ||
+          "Something went wrong"
 
-}
+        );
 
+      }
 
 
-};
+      // Success message
+      setSuccess(
 
+        "Thank you! Your request has been submitted successfully."
 
+      );
 
 
+      // Clear form
+      setFormData({
 
-const inputClass=(field)=>{
+        name: "",
 
-return errors[field] ? "error-input" : "";
+        email: "",
 
-};
+        company: "",
 
+        phone: "",
 
+        message: "",
 
+      });
 
-return (
 
-<div className="contact-page">
+      // Remove success message
+      setTimeout(() => {
 
+        setSuccess("");
 
-<Header/>
+      }, 5000);
 
 
-<main>
+    }
 
+    catch (error) {
 
-<div className="background-animation">
+      console.error(
 
-<span className="bg-circle"></span>
-<span className="bg-circle"></span>
-<span className="bg-circle"></span>
-<span className="bg-circle"></span>
-<span className="bg-circle"></span>
-<span className="bg-circle"></span>
-<span className="bg-circle"></span>
-<span className="bg-circle"></span>
-<span className="bg-circle"></span>
-<span className="bg-circle"></span>
+        "Contact Form Error:",
 
-</div>
+        error
 
+      );
 
 
-<section className="contact-hero">
+      setErrors({
 
+        submit:
 
-<div className="container hero-grid">
+          error.message ||
 
+          "Something went wrong. Please try again.",
 
+      });
 
-<div className="hero-content">
+    }
 
+    finally {
 
-<span className="hero-tag">
-CONTACT HEXONIQUE
-</span>
+      setLoading(false);
 
+    }
 
+  };
 
-<h1>
 
-Let's Build Your
-<br/>
-Next Digital
-<br/>
-Success Story
+  // ==========================================
+  // INPUT CLASS
+  // ==========================================
 
-</h1>
+  const inputClass = (field) => {
 
+    return errors[field]
 
+      ? "error-input"
 
-<p>
+      : "";
 
-Whether you're a startup, enterprise, or growing business,
-our experts are ready to transform your ideas into innovative
-digital solutions.
+  };
 
-</p>
 
+  return (
 
+    <div className="contact-page">
 
 
-<div className="hero-buttons">
+      <Header />
 
 
-<button
-className="primary-btn"
-onClick={scrollToForm}
->
+      <main>
 
-Get Free Consultation
 
-<ArrowRight size={18}/>
+        {/* BACKGROUND ANIMATION */}
 
-</button>
+        <div className="background-animation">
 
+          <span className="bg-circle"></span>
 
+          <span className="bg-circle"></span>
 
-<button
+          <span className="bg-circle"></span>
 
-className="secondary-btn"
+          <span className="bg-circle"></span>
 
-onClick={()=>navigate("/services")}
+          <span className="bg-circle"></span>
 
->
+          <span className="bg-circle"></span>
 
-View Services
+          <span className="bg-circle"></span>
 
-</button>
+          <span className="bg-circle"></span>
 
+          <span className="bg-circle"></span>
 
+          <span className="bg-circle"></span>
 
-</div>
+        </div>
 
 
+        {/* HERO SECTION */}
 
+        <section className="contact-hero">
 
-<div className="hero-features">
 
+          <div className="container hero-grid">
 
-<div>
-<CheckCircle size={18}/>
-Free Consultation
-</div>
 
+            <div className="hero-content">
 
-<div>
-<CheckCircle size={18}/>
-24/7 Support
-</div>
 
+              <span className="hero-tag">
 
-<div>
-<CheckCircle size={18}/>
-Fast Delivery
-</div>
+                CONTACT HEXONIQUE
 
+              </span>
 
 
-</div>
+              <h1>
 
+                Let's Build Your
 
+                <br />
 
-</div>
+                Next Digital
 
+                <br />
 
+                Success Story
 
+              </h1>
 
 
+              <p>
 
-<div
-className="contact-form-card"
-ref={formRef}
->
+                Whether you're a startup, enterprise,
 
+                or growing business, our experts are
 
-<h2>
-Request a Quote
-</h2>
+                ready to transform your ideas into
 
+                innovative digital solutions.
 
-<p>
-Fill out the form and our team will contact you within 24 hours.
-</p>
+              </p>
 
 
+              <div className="hero-buttons">
 
 
+                <button
 
-{
-success &&
+                  className="primary-btn"
 
-<div className="success-box">
+                  onClick={scrollToForm}
 
-{success}
+                >
 
-</div>
+                  Get Free Consultation
 
-}
+                  <ArrowRight size={18} />
 
+                </button>
 
 
+                <button
 
+                  className="secondary-btn"
 
-<form onSubmit={handleSubmit}>
+                  onClick={() => navigate("/services")}
 
+                >
 
+                  View Services
 
-<input
+                </button>
 
-className={inputClass("name")}
 
-type="text"
+              </div>
 
-name="name"
 
-value={formData.name}
+              <div className="hero-features">
 
-onChange={handleChange}
 
-placeholder="Your Name"
+                <div>
 
-/>
+                  <CheckCircle size={18} />
 
+                  Free Consultation
 
-<span>{errors.name}</span>
+                </div>
 
 
+                <div>
 
+                  <CheckCircle size={18} />
 
+                  24/7 Support
 
-<input
+                </div>
 
-className={inputClass("email")}
 
-type="email"
+                <div>
 
-name="email"
+                  <CheckCircle size={18} />
 
-value={formData.email}
+                  Fast Delivery
 
-onChange={handleChange}
+                </div>
 
-placeholder="Email Address"
 
-/>
+              </div>
 
 
-<span>{errors.email}</span>
+            </div>
 
 
+            {/* CONTACT FORM */}
 
+            <div
 
+              className="contact-form-card"
 
+              ref={formRef}
 
+            >
 
-<input
 
-className={inputClass("company")}
+              <h2>
 
-type="text"
+                Request a Quote
 
-name="company"
+              </h2>
 
-value={formData.company}
 
-onChange={handleChange}
+              <p>
 
-placeholder="Company Name"
+                Fill out the form and our team
 
-/>
+                will contact you within 24 hours.
 
+              </p>
 
-<span>{errors.company}</span>
 
+              {/* SUCCESS MESSAGE */}
 
+              {success && (
 
+                <div className="success-box">
 
+                  <CheckCircle size={18} />
 
+                  {success}
 
+                </div>
 
+              )}
 
-<input
 
-className={inputClass("phone")}
+              {/* SUBMIT ERROR */}
 
-type="text"
+              {errors.submit && (
 
-name="phone"
+                <div className="error-box">
 
-value={formData.phone}
+                  {errors.submit}
 
-onChange={handleChange}
+                </div>
 
-placeholder="Phone Number"
-maxLength="10"
+              )}
 
-/>
 
+              <form onSubmit={handleSubmit}>
 
-<span>{errors.phone}</span>
 
+                {/* NAME */}
 
+                <input
 
+                  className={inputClass("name")}
 
+                  type="text"
 
+                  name="name"
 
+                  value={formData.name}
 
+                  onChange={handleChange}
 
-<textarea
+                  placeholder="Your Name"
 
-className={inputClass("message")}
+                />
 
-rows="5"
 
-name="message"
+                <span className="field-error">
 
-value={formData.message}
+                  {errors.name}
 
-onChange={handleChange}
+                </span>
 
-placeholder="Tell us about your project..."
 
-></textarea>
+                {/* EMAIL */}
 
+                <input
 
-<span>{errors.message}</span>
+                  className={inputClass("email")}
 
+                  type="email"
 
+                  name="email"
 
+                  value={formData.email}
 
+                  onChange={handleChange}
 
+                  placeholder="Email Address"
 
-<button type="submit">
+                />
 
 
-<Send size={18}/>
+                <span className="field-error">
 
-Send Message
+                  {errors.email}
 
+                </span>
 
-</button>
 
+                {/* COMPANY */}
 
+                <input
 
-</form>
+                  className={inputClass("company")}
 
+                  type="text"
 
-</div>
+                  name="company"
 
+                  value={formData.company}
 
+                  onChange={handleChange}
 
-</div>
+                  placeholder="Company Name"
 
+                />
 
-</section>
 
+                <span className="field-error">
 
+                  {errors.company}
 
+                </span>
 
 
+                {/* PHONE */}
 
-<section className="contact-info">
+                <input
 
-<div className="container cards">
+                  className={inputClass("phone")}
 
+                  type="text"
 
-<div className="card">
+                  name="phone"
 
-<Mail/>
+                  value={formData.phone}
 
-<h3>Email</h3>
+                  onChange={handleChange}
 
-<p>
-<a href="mailto:hexoniquetechno@gmail.com">
-hexoniquetechno@gmail.com
-</a>
-</p>
+                  placeholder="Phone Number"
 
-</div>
+                  maxLength="10"
 
+                />
 
 
+                <span className="field-error">
 
+                  {errors.phone}
 
-<div className="card">
+                </span>
 
-<Phone/>
 
-<h3>Phone</h3>
+                {/* MESSAGE */}
 
-<p>
-<a href="tel:+919586347364">
-+91 95863 47364
-</a>
-</p>
+                <textarea
 
-</div>
+                  className={inputClass("message")}
 
+                  rows="5"
 
+                  name="message"
 
+                  value={formData.message}
 
+                  onChange={handleChange}
 
+                  placeholder="Tell us about your project..."
 
-<div className="card">
+                />
 
-<MapPin/>
 
-<h3>Location</h3>
+                <span className="field-error">
 
-<p>
-Rajkot, Gujarat
-</p>
+                  {errors.message}
 
-</div>
+                </span>
 
 
+                {/* SUBMIT BUTTON */}
 
+                <button
 
+                  type="submit"
 
+                  disabled={loading}
 
-<div className="card">
+                >
 
-<Clock/>
+                  <Send size={18} />
 
-<h3>Working Hours</h3>
 
-<p>
-Mon - Sat | 10 AM - 7 PM
-</p>
+                  {loading
 
-</div>
+                    ? "Sending..."
 
+                    : "Send Message"
 
+                  }
 
-</div>
+                </button>
 
-</section>
 
+              </form>
 
 
+            </div>
 
 
+          </div>
 
-<section className="why-contact">
 
+        </section>
 
-<div className="container">
 
+        {/* CONTACT INFORMATION */}
 
-<div className="section-heading">
+        <section className="contact-info">
 
 
-<span>
-WHY HEXONIQUE
-</span>
+          <div className="container cards">
 
 
-<h2>
-Trusted Technology Partner
-</h2>
+            <div className="card">
 
+              <Mail />
 
-<p>
-Delivering scalable software solutions with innovation,
-quality, and long-term business value.
-</p>
+              <h3>Email</h3>
 
+              <p>
 
-</div>
+                <a href="mailto:hexoniquetechno@gmail.com">
 
+                  hexoniquetechno@gmail.com
 
+                </a>
 
+              </p>
 
+            </div>
 
-<div className="features">
 
+            <div className="card">
 
+              <Phone />
 
-<div className="feature">
+              <h3>Phone</h3>
 
-<Globe/>
+              <p>
 
-<h3>
-Global Delivery
-</h3>
+                <a href="tel:+919586347364">
 
-<p>
-Serving businesses across India,
-USA, UK, UAE and Australia.
-</p>
+                  +91 95863 47364
 
+                </a>
 
-</div>
+              </p>
 
+            </div>
 
 
+            <div className="card">
 
+              <MapPin />
 
-<div className="feature">
+              <h3>Location</h3>
 
-<MessageCircle/>
+              <p>
 
-<h3>
-Dedicated Support
-</h3>
+                Rajkot, Gujarat
 
-<p>
-Transparent communication and continuous assistance.
-</p>
+              </p>
 
+            </div>
 
-</div>
 
+            <div className="card">
 
+              <Clock />
 
+              <h3>Working Hours</h3>
 
+              <p>
 
-<div className="feature">
+                Mon - Sat | 10 AM - 7 PM
 
-<Briefcase/>
+              </p>
 
-<h3>
-Professional Team
-</h3>
+            </div>
 
-<p>
-Experienced developers creating secure
-and scalable digital products.
-</p>
 
+          </div>
 
-</div>
 
+        </section>
 
 
+        {/* WHY HEXONIQUE */}
 
-</div>
+        <section className="why-contact">
 
 
-</div>
+          <div className="container">
 
 
-</section>
+            <div className="section-heading">
 
 
+              <span>
 
-</main>
+                WHY HEXONIQUE
 
+              </span>
 
 
-<Footer/>
+              <h2>
 
+                Trusted Technology Partner
 
-</div>
+              </h2>
 
 
-);
+              <p>
+
+                Delivering scalable software solutions
+
+                with innovation, quality, and long-term
+
+                business value.
+
+              </p>
+
+
+            </div>
+
+
+            <div className="features">
+
+
+              <div className="feature">
+
+                <Globe />
+
+                <h3>
+
+                  Global Delivery
+
+                </h3>
+
+                <p>
+
+                  Serving businesses across India,
+
+                  USA, UK, UAE and Australia.
+
+                </p>
+
+              </div>
+
+
+              <div className="feature">
+
+                <MessageCircle />
+
+                <h3>
+
+                  Dedicated Support
+
+                </h3>
+
+                <p>
+
+                  Transparent communication and
+
+                  continuous assistance.
+
+                </p>
+
+              </div>
+
+
+              <div className="feature">
+
+                <Briefcase />
+
+                <h3>
+
+                  Professional Team
+
+                </h3>
+
+                <p>
+
+                  Experienced developers creating
+
+                  secure and scalable digital products.
+
+                </p>
+
+              </div>
+
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+      </main>
+
+
+      <Footer />
+
+
+    </div>
+
+  );
 
 }
 
