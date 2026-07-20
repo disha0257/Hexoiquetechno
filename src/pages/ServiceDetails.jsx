@@ -14,9 +14,14 @@ import CTA from "../components/ServiceDetails/CTA";
 
 function ServiceDetails() {
   const { slug } = useParams();
-  const service = servicesData[slug];
 
-  if (!service) return <h1>Service Not Found</h1>;
+  const service = Object.values(servicesData).find(
+    (item) => item.slug === slug
+  );
+
+  if (!service) {
+    return <h1>Service Not Found</h1>;
+  }
 
   return (
     <>

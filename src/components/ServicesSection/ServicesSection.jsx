@@ -333,17 +333,11 @@ Built For Future Businesses.
 
 
 <Link
-
-to={`/services/${service.link}`}
-
-className={styles.button}
-
+  to="/services"
+  className={styles.button}
 >
-
-Explore Service
-
-<FaArrowRight/>
-
+  Explore Service
+  <FaArrowRight />
 </Link>
 
 

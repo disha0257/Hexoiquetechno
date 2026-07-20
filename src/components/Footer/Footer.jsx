@@ -57,7 +57,7 @@ function Footer() {
 
           <div className={styles.socialRow}>
             <a
-              href="https://wa.me/919876543210"
+              href="https://wa.me/919586347364"
               target="_blank"
               rel="noreferrer"
               aria-label="WhatsApp"
@@ -66,7 +66,7 @@ function Footer() {
             </a>
 
             <a
-              href="https://instagram.com/your_username"
+              href="https://www.instagram.com/hexoniquetechno/"
               target="_blank"
               rel="noreferrer"
               aria-label="Instagram"
@@ -75,7 +75,7 @@ function Footer() {
             </a>
 
             <a
-              href="https://linkedin.com/company/your-company"
+              href="https://www.linkedin.com/company/hexoniquetechno"
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
